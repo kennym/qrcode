@@ -35,7 +35,6 @@
           qrCodeManager.showDialog(url);
         }
       });
-    
     };
   };
 
@@ -224,13 +223,12 @@
             setInterval(captureFrame.bind(self), 4);
           }
           else {
-            // This is just to get around the fact that the videoWidth is not
-            // available in Firefox until sometime after the data has loaded.
-            setTimeout(function() {
+            var loop = function() {
               setupVariables(e);
 
               setInterval(captureFrame.bind(self), 4);
-            }, 100);
+            }
+            requestAnimationFrame(loop);
           }
 
           // The video is ready, and the camerea captured
