@@ -190,6 +190,8 @@
       if(self.onframe) self.onframe();
 
       coordinatesHaveChanged = false;
+
+      requestAnimationFrame(captureFrame);
     };
 
     var getCamera = function(videoSource, cb) {
@@ -220,13 +222,13 @@
           
           var isSetup = setupVariables(e);
           if(isSetup) {
-            setInterval(captureFrame.bind(self), 4);
+            requestAnimationFrame(captureFrame.bind(self));
           }
           else {
             var loop = function() {
               setupVariables(e);
 
-              setInterval(captureFrame.bind(self), 4);
+              requestAnimationFrame(captureFrame.bind(self));
             }
             requestAnimationFrame(loop);
           }
